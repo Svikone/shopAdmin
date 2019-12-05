@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './routes'
-
+export const eventBus = new Vue()
 
 Vue.config.productionTip = false
 import VueMaterial from 'vue-material'

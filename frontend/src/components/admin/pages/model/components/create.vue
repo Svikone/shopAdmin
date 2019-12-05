@@ -1,8 +1,6 @@
 <template lang="html">
 
-  <section class="model">
-    
-
+  <section class="create">
     <div class="">
       <div class="md-layout-item">
         <md-field>
@@ -26,7 +24,7 @@
 
 
   export default  {
-    name: 'model',
+    name: 'create',
     props: [],
     mounted () {
       this.getMarc()
@@ -68,7 +66,7 @@
 </script>
 
 <style scoped lang="scss">
-  .model {
+  .create {
 
   }
 </style>

@@ -1,6 +1,6 @@
 <template lang="html">
 
-  <section class="marca">
+  <section class="create">
     <h1>Добавить марку автомобиля</h1>
     <div class="">
       Добавьте марку авто
@@ -16,15 +16,15 @@
 
 
   export default  {
-    name: 'marca',
+    name: 'create',
     props: [],
     mounted () {
 
     },
     data () {
       return {
-         api_url: 'http://localhost:9000/api',
-         marc:""
+        api_url: 'http://localhost:9000/api',
+        marc:""
       }
     },
     methods: {
@@ -46,7 +46,7 @@
 </script>
 
 <style scoped lang="scss">
-  .marca {
+  .create {
 
   }
 </style>

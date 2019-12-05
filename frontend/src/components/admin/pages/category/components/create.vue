@@ -1,7 +1,7 @@
 <template lang="html">
 
-  <section class="category">
-    Добавить категорию
+  <section class="create">
+     Добавить категорию
     <input v-model="category" type="text" name="" id="">
     Категорию на руском
     <input v-model="category_ru" type="text" name="" id="">
@@ -16,7 +16,7 @@
 
 
   export default  {
-    name: 'category',
+    name: 'create',
     props: [],
     mounted () {
 
@@ -39,7 +39,6 @@
 
         })
       }
-      
     },
     computed: {
 
@@ -50,7 +49,7 @@
 </script>
 
 <style scoped lang="scss">
-  .category {
+  .create {
 
   }
 </style>

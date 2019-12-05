@@ -4,6 +4,8 @@
     <router-link class="item" to="/marca">Работа с маркой авто</router-link>
     <router-link class="item" to="/model">Работа с моделью авто</router-link>
     <router-link class="item" to="/category">Категории</router-link>
+    <router-link class="item" to="/catalog">Детали</router-link>
+
 
 
   </section>
@@ -43,9 +45,11 @@
         padding: 10px;
         background:#8BC34A;
         font-family: sans-serif;
+        border-left: 20px solid #607d8b;
         cursor: pointer;
         &:hover {
           color: white;
+          border-left: 20px solid #24d82c;
         }
       }
   }

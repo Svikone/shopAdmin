@@ -52,11 +52,10 @@ import menu from './menu/menu'
       min-width: 197px;
       background: #607D8B;
       height: 100%;
-      padding-left: 10px;
-      
     }
     .content {
       width: 100%;
+      padding: 10px;
     }
   }
 </style>
