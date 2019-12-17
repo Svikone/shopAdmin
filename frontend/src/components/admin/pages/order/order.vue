@@ -1,7 +1,8 @@
 <template lang="html">
 
-  <section class="table">
-    <h1>table Component</h1>
+  <section class="order">
+    <router-view></router-view>
+    
   </section>
 
 </template>
@@ -9,7 +10,7 @@
 <script lang="js">
 
   export default  {
-    name: 'table',
+    name: 'order',
     props: [],
     mounted () {
 
@@ -31,7 +32,7 @@
 </script>
 
 <style scoped lang="scss">
-  .table {
+  .order {
 
   }
 </style>

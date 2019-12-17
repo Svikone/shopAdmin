@@ -1,6 +1,6 @@
 import model from './model.vue'
 import create from './components/create.vue'
-import table from './components/table.vue'
+import table from '../../../table/table.vue'
 
 
 

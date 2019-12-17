@@ -5,8 +5,7 @@
     <router-link class="item" to="/model">Работа с моделью авто</router-link>
     <router-link class="item" to="/category">Категории</router-link>
     <router-link class="item" to="/catalog">Детали</router-link>
-
-
+    <router-link class="item" to="/order">Заказы</router-link>
 
   </section>
 

@@ -1,6 +1,7 @@
 import marca from './marca.vue'
 import create from './components/create.vue'
-import table from './components/table.vue'
+import table from '../../../table/table.vue'
+
 
 export default {
     path: '/marca',
