@@ -13,6 +13,7 @@
       </div>
       Добавьте модель авто
       <input v-model="model" type="text" name="" id="">
+      <input type="file" id="file" name="file">
       <button @click="addModel()">Добавить</button>
     </div>
   </section>
@@ -48,7 +49,14 @@
       },
 
       addModel() {
-        axios.post(this.api_url+'/model/add',{marc: this.selected, model: this.model}).then(result => {
+        var data = new FormData();
+        var imagefile = document.querySelector('#file')
+
+        data.append('file', imagefile.files[0])
+        data.append('model', this.model)
+        data.append('marc', this.selected)
+
+        axios.post(this.api_url+'/model/add',data).then(result => {
           // this.marcs = result.data
           // console.log(result.data)
           console.log(result)

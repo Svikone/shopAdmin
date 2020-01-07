@@ -3,9 +3,12 @@
   <section class="create">
     <h1>Добавить марку автомобиля</h1>
     <div class="">
-      Добавьте марку авто
-      <input v-model="marc" type="text" name="" id="">
-      <button @click="addMarc()">Добавить</button>
+      <!-- <form id="uploadForm" name="uploadForm" enctype="multipart/form-data"> -->
+        Добавьте марку авто
+        <input  type="text" id="marc" name="marc"  v-model="marc">
+        <input type="file"  id="file" name="file" >
+        <div @click="addMarc()">Добавить</div>
+      <!-- </form> -->
     </div>
   </section>
 
@@ -24,14 +27,22 @@
     data () {
       return {
         api_url: 'http://localhost:9000/api',
-        marc:""
+        marc:''
       }
     },
     methods: {
       addMarc() {
-        axios.post(this.api_url+'/admin/marca/add',{marca: this.marc
-        }).then(() => {
+        var data = new FormData();
+        var imagefile = document.querySelector('#file')
 
+        data.append('file', imagefile.files[0])
+        data.append('marca', this.marc)
+
+
+        
+        axios.post(this.api_url+'/admin/marca/add', data,{ 
+        }).then(() => {
+         
         }).catch(() => {
 
         })

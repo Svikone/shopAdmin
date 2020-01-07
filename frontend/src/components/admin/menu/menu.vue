@@ -1,6 +1,7 @@
 <template lang="html">
 
   <section class="menu">
+    <div>Shop admin</div>
     <router-link class="item" to="/marca">Работа с маркой авто</router-link>
     <router-link class="item" to="/model">Работа с моделью авто</router-link>
     <router-link class="item" to="/category">Категории</router-link>

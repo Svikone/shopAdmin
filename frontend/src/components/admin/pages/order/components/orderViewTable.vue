@@ -5,6 +5,17 @@
       <md-table-row>
         <md-table-head md-numeric v-for="(field, i) in fields" v-bind:key="i">{{field.name}} </md-table-head>
       </md-table-row>
+
+      <md-table-row v-for="(item, j) in data" v-bind:key="j">
+        <md-table-cell md-numeric v-for="(field, i) in fields" v-bind:key="i" >
+          <div >
+            {{item[field.field]}}
+
+          </div>
+        </md-table-cell>
+      </md-table-row>
+
+      
     </md-table>
   </section>
 
@@ -12,21 +23,36 @@
 
 <script lang="js">
   import orderItemConfig from'../../../../table/configs/orderItemsConfig.js'
+  import axios from 'axios'
+
+
   export default  {
     name: 'order-view-table',
     props: [],
 
     mounted () {
-      this.fields = orderItemConfig.fields
+      this.fields = orderItemConfig.fields,
+      this.getOrderItems()
     },
     data () {
       return {
-        fields:[]
+        fields:[],
+        api_url: 'http://localhost:9000/api',
+        url: this.$router.currentRoute.params.id,
+        data:[]
+
 
       }
     },
     methods: {
+      getOrderItems() {
+        axios.post(this.api_url+'/order/by/id',{id: this.url}).then(result => {
+          console.log(result)
+          this.data = result.data
+        }).catch(() => {
 
+        })
+      }
     },
     computed: {
 
@@ -38,6 +64,6 @@
 
 <style scoped lang="scss">
   .order-view-table {
-
+    
   }
 </style>

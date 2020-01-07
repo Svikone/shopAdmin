@@ -13,6 +13,7 @@ exports.fields = [
     },
     {
         name: "Изображение",
+        type: 'img',
         field: "url_img",
     },
 

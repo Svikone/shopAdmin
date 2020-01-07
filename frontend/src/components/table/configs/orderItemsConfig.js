@@ -5,7 +5,7 @@ exports.fields = [
     },
     {
         name: "Продукт",
-        field: "product_id",
+        field: "name",
     },
     {
         name: "Цена за еденицу",
@@ -23,7 +23,7 @@ exports.fields = [
 ]
 
 exports.api = {
-    url: 'admin/get/marcs'
+    url: 'order/by/id'
 }
 
 exports.btn = {

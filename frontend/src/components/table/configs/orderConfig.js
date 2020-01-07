@@ -8,10 +8,12 @@ exports.fields = [
     {
         name: "Статус заказа",
         field: "status_confirm",
+        type: 'Boolean'
     },
     {
         name: "Статус оплаты",
         field: "status_payment",
+        type: 'Boolean'
     },
     {
         name: "Имя",
@@ -41,7 +43,7 @@ exports.fields = [
 ]
 
 exports.api = {
-    url: 'admin/get/marcs'
+    url: 'order/get/all'
 }
 
 exports.btn = {

@@ -13,16 +13,24 @@
       </md-table-row>
 
       <md-table-row  v-for="(item, j) in data" v-bind:key="j">
-          <md-table-cell md-numeric  v-for="(field, i) in fields" v-bind:key="i" >
-            <div v-if="field.type == 'link'"> 
-              <router-link :to="field.url+'/'+item._id">
-                  {{item[field.field]}}
-              </router-link>
-            </div>
-            <div v-else>{{item[field.field]}}</div>
-          </md-table-cell>
+        <md-table-cell md-numeric  v-for="(field, i) in fields" v-bind:key="i" >
+          <div v-if="field.type == 'link'"> 
+            <router-link :to="field.url+'/'+item._id">
+                {{item[field.field]}}
+            </router-link>
+          </div>
+          <div v-else-if="field.type == 'img'">
+            <img v-bind:src="'http://localhost:9000/file/uploads/'+item.url_img" />
+          </div>    
+          <div v-else-if="field.type == 'Boolean'" >
+            <md-checkbox @change="changeStatusConfirm(item, field.field)" v-model="item[field.field]" class="md-primary"></md-checkbox>  
+            
+          </div>                
+          <div v-else>{{item[field.field]}}</div>
+        </md-table-cell>
       </md-table-row>
     </md-table>
+
   </section>
 
 </template>
@@ -42,7 +50,7 @@
     props: [],
     mounted () {
       // this.fields = catalogConfig.fields,
-      this.switchConfig() 
+      this.switchConfig()
     },
     data () {
       return {
@@ -51,14 +59,32 @@
         data:[],
         api:'',
         route: this.$route.path,
-        btn:''
+        btn:'',
+        
+        bulcks: []
 
       }
     },
     methods: {
+      changeStatusConfirm(item, mode) {
+        for(let status of this.data) {
+          if(status._id == item._id) {
+          console.log(status)
+            status[mode] ='! status[mode]'
+            console.log(status)
+
+            let foundIndex = this.bulcks.findIndex(x => x._id == item._id)
+            if(foundIndex != -1)
+              this.bulcks.push(status)
+            else
+              this.bulcks[foundIndex] = status
+            
+          }
+        }
+        console.log(item,mode)
+      },
       getDataTable() {
         axios.post(this.api_url+this.api,{}).then(result => {
-          console.log(result)
           this.data = result.data
         }).catch(() => {
 
@@ -112,6 +138,8 @@
 
 <style scoped lang="scss">
   .table {
-
+    img {
+      max-width: 45px;
+    }
   }
 </style>

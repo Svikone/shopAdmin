@@ -5,7 +5,7 @@
     <input v-model="category" type="text" name="" id="">
     Категорию на руском
     <input v-model="category_ru" type="text" name="" id="">
-
+    <input type="file" name="file" id="file">
     <button @click="addCategory()">Добавить</button>
   </section>
 
@@ -30,8 +30,14 @@
     },
     methods: {
       addCategory() {
-        console.log(this.category_ru,this.category)
-        axios.post(this.api_url+'/category/add',{category: this.category, category_ru: this.category_ru}).then(result => {
+        // console.log(this.category_ru,this.category)
+        var data = new FormData();
+        var imagefile = document.querySelector('#file')
+
+        data.append('file', imagefile.files[0])
+        data.append('category', this.category)
+        data.append('category_ru', this.category_ru)
+        axios.post(this.api_url+'/category/add',data).then(result => {
           // this.marcs = result.data
           // console.log(result.data)
           console.log(result)

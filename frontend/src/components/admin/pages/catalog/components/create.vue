@@ -8,7 +8,7 @@
     <input v-model="name" type="text" name="" id="" placeholder="Название детали">
     <input v-model="price" type="number" name="" id="" placeholder="Цена детали">
     <input v-model="country" type="text" name="" id="" placeholder="Страна изготовитель">
-
+    <input type="file" name="file" id="file">
 
     <div class="btn" @click="addCatalog()">Отправить</div>
     <h1>create Component</h1>
@@ -58,16 +58,18 @@
     methods: {
       addCatalog() {
         console.log(this.selectedModel,this.selected, this.selectedCategory,this.price)
-        
-        axios.post(this.api_url+'/catalog/add',{
-          marca: this.selected,
-          model: this.selectedModel,
-          category: this.selectedCategory,
-          name: this.name,
-          price: this.price,
-          country: this.country
+        var data = new FormData();
+        var imagefile = document.querySelector('#file')
 
-        }).then(result => {
+        data.append('file', imagefile.files[0])
+        data.append('marca', this.selected)
+        data.append('model', this.selectedModel)
+        data.append('category', this.selectedCategory)
+        data.append('name', this.name)
+        data.append('price', this.price)
+        data.append('country', this.country)
+
+        axios.post(this.api_url+'/catalog/add',data).then(result => {
           this.models = result.data
         }).catch(() => {
 
