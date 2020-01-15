@@ -22,6 +22,8 @@
 
 <script lang="js">
   import axios from 'axios'
+  import api from '../../../../../app.config.js'
+
 
 
   export default  {
@@ -32,7 +34,7 @@
     },
     data () {
       return {
-        api_url: 'http://localhost:9000/api',
+        api_url: api.config,
         marcs: [],
         selected: '',
         model:''
@@ -40,7 +42,7 @@
     },
     methods: {
       getMarc() {
-        axios.post(this.api_url+'/admin/get/marcs',{}).then(result => {
+        axios.post(this.api_url.url+this.api_url.api+'/admin/get/marcs',{}).then(result => {
           this.marcs = result.data
           console.log(result.data)
         }).catch(() => {
@@ -56,7 +58,7 @@
         data.append('model', this.model)
         data.append('marc', this.selected)
 
-        axios.post(this.api_url+'/model/add',data).then(result => {
+        axios.post(this.api_url.url+this.api.api+'/model/add',data).then(result => {
           // this.marcs = result.data
           // console.log(result.data)
           console.log(result)

@@ -20,6 +20,8 @@
   import axios from 'axios'
   import select from './select.vue'
   import {eventBus} from '../../../../../main.js'
+  import api from '../../../../../app.config.js'
+
 
 
 
@@ -43,7 +45,7 @@
     },
     data () {
       return {
-        api_url: 'http://localhost:9000/api',
+        api_url: api.config,
         marcs: [],
         models: [],
         category: [],
@@ -69,7 +71,7 @@
         data.append('price', this.price)
         data.append('country', this.country)
 
-        axios.post(this.api_url+'/catalog/add',data).then(result => {
+        axios.post(this.api_url.url+this.api_url.api+'/catalog/add',data).then(result => {
           this.models = result.data
         }).catch(() => {
 
@@ -79,7 +81,7 @@
       select(event) {
         console.log(event)
         
-        axios.post(this.api_url+'/model/marc',{id: event}).then(result => {
+        axios.post(this.api_url.url+this.api_url.api+'/model/marc',{id: event}).then(result => {
           this.models = result.data
         }).catch(() => {
 
@@ -87,7 +89,7 @@
       },
 
       getMarc() {
-        axios.post(this.api_url+'/admin/get/marcs',{}).then(result => {
+        axios.post(this.api_url.url+this.api_url.api+'/admin/get/marcs',{}).then(result => {
           this.marcs = result.data
         }).catch(() => {
 
@@ -95,7 +97,7 @@
       },
 
       getCategory() {
-        axios.post(this.api_url+'/category/get/all',{}).then(result => {
+        axios.post(this.api_url.url+this.api_url.api+'/category/get/all',{}).then(result => {
           this.category = result.data
           console.log(this.category[0].selector)
         }).catch(() => {

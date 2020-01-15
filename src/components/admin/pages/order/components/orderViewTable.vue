@@ -24,6 +24,8 @@
 <script lang="js">
   import orderItemConfig from'../../../../table/configs/orderItemsConfig.js'
   import axios from 'axios'
+  import api from '../../../../../app.config.js'
+
 
 
   export default  {
@@ -37,7 +39,7 @@
     data () {
       return {
         fields:[],
-        api_url: 'http://localhost:9000/api',
+        api_url: api.config,
         url: this.$router.currentRoute.params.id,
         data:[]
 
@@ -46,7 +48,7 @@
     },
     methods: {
       getOrderItems() {
-        axios.post(this.api_url+'/order/by/id',{id: this.url}).then(result => {
+        axios.post(this.api_url.url+this.api_url.api+'/order/by/id',{id: this.url}).then(result => {
           console.log(result)
           this.data = result.data
         }).catch(() => {

@@ -20,16 +20,19 @@
             </router-link>
           </div>
           <div v-else-if="field.type == 'img'">
-            <img v-bind:src="'http://localhost:9000/file/uploads/'+item.url_img" />
+            <img v-bind:src="api_url.url+'/file/uploads/'+item.url_img" />
           </div>    
           <div v-else-if="field.type == 'Boolean'" >
-            <md-checkbox @change="changeStatusConfirm(item, field.field)" v-model="item[field.field]" class="md-primary"></md-checkbox>  
+            <input type="checkbox" @click="changeStatusConfirm(item, field.field)"  class="md-primary"> 
             
           </div>                
           <div v-else>{{item[field.field]}}</div>
         </md-table-cell>
       </md-table-row>
     </md-table>
+
+
+            <input type="checkbox" @click="qwe(data[0])"  v-model="test" class="md-primary"> 
 
   </section>
 
@@ -43,6 +46,8 @@
   import orderConfig from './configs/orderConfig.js'
   import btn from '../admin/pages/btnCreate/btn.vue'
   import axios from 'axios'
+  import api from '../../app.config.js'
+
 
   export default  {
 
@@ -55,23 +60,28 @@
     data () {
       return {
         fields:[],
-        api_url:'http://localhost:9000/api/',
+        api_url: api.config,
         data:[],
         api:'',
         route: this.$route.path,
         btn:'',
         
-        bulcks: []
+        bulcks: [],
+        test: false
 
       }
     },
     methods: {
+      qwe(item) {
+        console.log(item)
+      },
       changeStatusConfirm(item, mode) {
         for(let status of this.data) {
           if(status._id == item._id) {
           console.log(status)
+            const temp = !status[mode]
             status[mode] ='! status[mode]'
-            console.log(status)
+            console.log(temp)
 
             let foundIndex = this.bulcks.findIndex(x => x._id == item._id)
             if(foundIndex != -1)
@@ -84,7 +94,7 @@
         console.log(item,mode)
       },
       getDataTable() {
-        axios.post(this.api_url+this.api,{}).then(result => {
+        axios.post(this.api_url.url+this.api_url.api+'/'+this.api,{}).then(result => {
           this.data = result.data
         }).catch(() => {
 

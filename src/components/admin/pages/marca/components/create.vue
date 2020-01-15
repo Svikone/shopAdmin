@@ -16,6 +16,8 @@
 
 <script lang="js">
   import axios from 'axios'
+  import api from '../../../../../app.config.js'
+
 
 
   export default  {
@@ -26,7 +28,7 @@
     },
     data () {
       return {
-        api_url: 'http://localhost:9000/api',
+        api_url: api.config,
         marc:''
       }
     },
@@ -40,7 +42,7 @@
 
 
         
-        axios.post(this.api_url+'/admin/marca/add', data,{ 
+        axios.post(this.api_url.url+this.api_url.api+'/admin/marca/add', data,{ 
         }).then(() => {
          
         }).catch(() => {

@@ -13,6 +13,8 @@
 
 <script lang="js">
   import axios from 'axios'
+  import api from '../../../../../app.config.js'
+
 
 
   export default  {
@@ -23,7 +25,7 @@
     },
     data () {
       return {
-        api_url: 'http://localhost:9000/api',
+        api_url: api.config,
         category:'',
         category_ru:''
       }
@@ -37,7 +39,7 @@
         data.append('file', imagefile.files[0])
         data.append('category', this.category)
         data.append('category_ru', this.category_ru)
-        axios.post(this.api_url+'/category/add',data).then(result => {
+        axios.post(this.api_url.url+this.api_url.api+'/category/add',data).then(result => {
           // this.marcs = result.data
           // console.log(result.data)
           console.log(result)
