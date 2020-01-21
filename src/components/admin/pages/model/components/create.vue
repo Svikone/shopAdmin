@@ -10,11 +10,20 @@
             <md-option  v-for="(item, i) in marcs" v-bind:key="i" v-bind:value="item.name">{{item.name}}</md-option>
           </md-select>
         </md-field>
+
+        <md-field>
+          <label>Добавьте модель авто</label>
+          <md-input v-model="model" type="text" name="" id=""></md-input>
+        </md-field>
+
+        <md-field>
+          <label>Добавьте изображение</label>
+          <md-file  ref="fileupload" id="file" v-model="file"/>
+        </md-field>
       </div>
-      Добавьте модель авто
-      <input v-model="model" type="text" name="" id="">
-      <input type="file" id="file" name="file">
-      <button @click="addModel()">Добавить</button>
+
+      <md-button class="md-raised md-primary"  @click="addModel()">Добавить</md-button>
+
     </div>
   </section>
 
@@ -37,7 +46,8 @@
         api_url: api.config,
         marcs: [],
         selected: '',
-        model:''
+        model:'',
+        file: null
       }
     },
     methods: {
@@ -48,6 +58,7 @@
         }).catch(() => {
 
         })
+        
       },
 
       addModel() {
@@ -58,13 +69,16 @@
         data.append('model', this.model)
         data.append('marc', this.selected)
 
-        axios.post(this.api_url.url+this.api.api+'/model/add',data).then(result => {
+        axios.post(this.api_url.url+this.api_url.api+'/model/add',data).then(result => {
           // this.marcs = result.data
           // console.log(result.data)
           console.log(result)
         }).catch(() => {
 
         })
+        this.model = null
+        this.file = null;
+        this.selected = null
       }
     },
     computed: {

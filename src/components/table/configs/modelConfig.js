@@ -16,6 +16,15 @@ exports.fields = [
         type: 'img',
         field: "url_img",
     },
+    {
+        name: "",
+        type: 'update'
+    },
+    {
+        name: "",
+        type: 'close',
+        field: "_id"
+    }
 
 ]
 

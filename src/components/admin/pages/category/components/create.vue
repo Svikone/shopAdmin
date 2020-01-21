@@ -1,12 +1,22 @@
 <template lang="html">
 
   <section class="create">
-     Добавить категорию
-    <input v-model="category" type="text" name="" id="">
-    Категорию на руском
-    <input v-model="category_ru" type="text" name="" id="">
-    <input type="file" name="file" id="file">
-    <button @click="addCategory()">Добавить</button>
+    <md-field>
+      <label>Добавить категорию en</label>
+      <md-input v-model="category" type="text" name="" id=""></md-input>
+    </md-field>
+
+    <md-field>
+      <label>Категорию на руском</label>
+      <md-input v-model="category_ru" type="text"></md-input>
+    </md-field>
+
+    <md-field>
+      <label>Добавьте изображение</label>
+      <md-file  ref="fileupload" id="file" v-model="file"/>
+    </md-field>
+    
+    <md-button class="md-raised md-primary"  @click="addCategory()">Добавить</md-button>
   </section>
 
 </template>
@@ -27,7 +37,8 @@
       return {
         api_url: api.config,
         category:'',
-        category_ru:''
+        category_ru:'',
+        file: null
       }
     },
     methods: {
@@ -46,6 +57,10 @@
         }).catch(() => {
 
         })
+
+        this.category = null
+        this.category_ru = null;
+        this.file = null
       }
     },
     computed: {

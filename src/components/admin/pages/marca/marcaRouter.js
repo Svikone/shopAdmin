@@ -1,6 +1,8 @@
 import marca from './marca.vue'
 import create from './components/create.vue'
 import table from '../../../table/table.vue'
+import update from '../marca/components/update.vue'
+
 
 
 export default {
@@ -15,6 +17,10 @@ export default {
         {
             path: '',
             component: table
+        },
+        {
+            path: 'update/:id',
+            component: update
         },
     ]
 }

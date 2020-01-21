@@ -1,17 +1,27 @@
 <template lang="html">
 
   <section class="create">
-
+    <h1>Добавление деталей</h1>
     <app-select :items='marcs' :message="'Выберети марку'" ></app-select>
     <app-select :items='category' :message="'Выберети  категорию'" ></app-select>
     <app-select :items='models' :message="'Выберети  модель'" ></app-select>
-    <input v-model="name" type="text" name="" id="" placeholder="Название детали">
-    <input v-model="price" type="number" name="" id="" placeholder="Цена детали">
-    <input v-model="country" type="text" name="" id="" placeholder="Страна изготовитель">
-    <input type="file" name="file" id="file">
-
-    <div class="btn" @click="addCatalog()">Отправить</div>
-    <h1>create Component</h1>
+    <md-field>
+      <label>Название детали</label>
+      <md-input v-model="name" type="text"></md-input>
+    </md-field>
+    <md-field>
+      <label>Цена детали</label>
+      <md-input v-model="price" type="number"></md-input>
+    </md-field>
+    <md-field>
+      <label>Страна изготовитель</label>
+      <md-input v-model="country" type="text"></md-input>
+    </md-field>
+    <md-field>
+      <label>Добавьте изображение</label>
+      <md-file  ref="fileupload" id="file" v-model="file"/>
+    </md-field>
+    <md-button class="md-raised md-primary" @click="addCatalog()">Добавить</md-button>
   </section>
 
 </template>
@@ -54,7 +64,8 @@
         selectedModel: '',
         name: '',
         price: '',
-        country: ''
+        country: '',
+        file: ''
       }
     },
     methods: {
@@ -76,6 +87,13 @@
         }).catch(() => {
 
         })
+
+        this.category = [];
+        this.models = [];
+        this.name = null;
+        this.price = null;
+        this.country = null;
+        this.file = null;
       },
 
       select(event) {

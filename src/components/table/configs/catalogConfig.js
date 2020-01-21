@@ -26,6 +26,16 @@ exports.fields = [
     {
         name: "Страна производитель",
         field: "country",
+    },
+    {
+        name: "Изображение",
+        type: 'img',
+        field: "url_img",
+    },
+    {
+        name: "",
+        type: 'close',
+        field: "_id"
     }
 ]
 

@@ -24,15 +24,19 @@
           </div>    
           <div v-else-if="field.type == 'Boolean'" >
             <input type="checkbox" @click="changeStatusConfirm(item, field.field)"  class="md-primary"> 
-            
-          </div>                
+          </div> 
+          <div @click="remove(item[field.field])" v-else-if="field.type == 'close'">
+            <img src="../../assets/close.png"/>
+          </div>  
+          <div v-else-if="field.type == 'update'" >
+            <router-link :to="route+'/update/'+item._id">
+              <md-button class="md-raised md-primary">Update</md-button>
+            </router-link>
+          </div>             
           <div v-else>{{item[field.field]}}</div>
         </md-table-cell>
       </md-table-row>
     </md-table>
-
-
-            <input type="checkbox" @click="qwe(data[0])"  v-model="test" class="md-primary"> 
 
   </section>
 
@@ -48,13 +52,11 @@
   import axios from 'axios'
   import api from '../../app.config.js'
 
-
   export default  {
 
     name: 'table',
     props: [],
     mounted () {
-      // this.fields = catalogConfig.fields,
       this.switchConfig()
     },
     data () {
@@ -67,13 +69,16 @@
         btn:'',
         
         bulcks: [],
-        test: false
+        test: false,
+        alo:''
 
       }
     },
     methods: {
-      qwe(item) {
-        console.log(item)
+      remove(id) {
+        axios.post(this.api_url.url+this.api_url.api+this.route+'/remove',{id:id}).then(() => {
+        }).catch(() => {
+        })
       },
       changeStatusConfirm(item, mode) {
         for(let status of this.data) {
@@ -134,6 +139,7 @@
         console.log(this.$router.currentRoute.path)
         this.getDataTable()
       }
+      
     },
     computed: {
 
@@ -148,6 +154,25 @@
 
 <style scoped lang="scss">
   .table {
+    th, td {
+      width:7vw;
+      text-align: center;
+    }
+    th {
+      .md-table-head-container {
+        width: 14vw;
+        text-align: center;
+        word-wrap: break-word;
+      }
+    }
+    td {
+      .md-table-cell-container {
+        width: 14vw !important;
+        text-align: center !important;
+        word-wrap: break-word !important;
+      }
+    }
+    
     img {
       max-width: 45px;
     }

@@ -4,10 +4,18 @@
     <h1>Добавить марку автомобиля</h1>
     <div class="">
       <!-- <form id="uploadForm" name="uploadForm" enctype="multipart/form-data"> -->
-        Добавьте марку авто
-        <input  type="text" id="marc" name="marc"  v-model="marc">
-        <input type="file"  id="file" name="file" >
-        <div @click="addMarc()">Добавить</div>
+        
+        <md-field>
+          <label>Добавьте марку авто</label>
+          <md-input  type="text" id="marc" name="marc"  v-model="marc"></md-input>
+        </md-field>
+        <md-field>
+          <label>Добавьте изображение</label>
+          <md-file ref="fileupload" id="file" v-model="file"/>
+        </md-field>
+          <!-- <input type="file"  id="file" name="file" > -->
+          <md-button class="md-raised md-primary"  @click="addMarc()">Добавить</md-button>
+        <!-- <div @click="addMarc()">Добавить</div> -->
       <!-- </form> -->
     </div>
   </section>
@@ -29,7 +37,8 @@
     data () {
       return {
         api_url: api.config,
-        marc:''
+        marc:'',
+        file: null
       }
     },
     methods: {
@@ -48,6 +57,9 @@
         }).catch(() => {
 
         })
+        this.marc = null
+        this.file = null;
+
       }
     },
     computed: {
