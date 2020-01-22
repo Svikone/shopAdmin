@@ -75,7 +75,6 @@
         let url = '';
         if(this.route !== '/marca')  url = this.route
         else url = '/admin'
-
         axios.post(this.api_url.url+this.api_url.api+url+'/remove',{id:id}).then(() => {
           this.getDataTable()
         }).catch(() => {
