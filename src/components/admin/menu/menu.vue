@@ -38,6 +38,7 @@
 
 <style scoped lang="scss">
   .menu {
+    
     .item {
         border-top: 1px solid #607d8b;
         text-decoration: none;

@@ -47,15 +47,17 @@ import menu from './menu/menu'
     .menu {
       display: flex;
       flex-direction: column;
-      // position: fixed;
       // width: 300px;
       min-width: 197px;
       background: #607D8B;
       height: 100%;
+      position: fixed;
+
     }
     .content {
       width: 100%;
       padding: 10px;
+      margin-left: 197px;
     }
   }
 </style>

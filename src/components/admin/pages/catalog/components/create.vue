@@ -87,7 +87,11 @@
         }).catch(() => {
 
         })
+        this.clear()
+      },
 
+      clear() {
+        this.marcs = [];
         this.category = [];
         this.models = [];
         this.name = null;

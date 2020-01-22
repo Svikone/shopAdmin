@@ -18,6 +18,10 @@ exports.fields = [
     },
     {
         name: "",
+        type: 'update'
+    },
+    {
+        name: "",
         type: 'close',
         field: "_id"
     }

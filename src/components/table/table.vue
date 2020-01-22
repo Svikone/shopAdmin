@@ -23,9 +23,9 @@
             <img v-bind:src="api_url.url+'/file/uploads/'+item.url_img" />
           </div>    
           <div v-else-if="field.type == 'Boolean'" >
-            <input type="checkbox" @click="changeStatusConfirm(item, field.field)"  class="md-primary"> 
+            <md-switch v-model="item[field.field]" class="md-primary" @change="changeStatusConfirm(item, field.field)"></md-switch>
           </div> 
-          <div @click="remove(item[field.field])" v-else-if="field.type == 'close'">
+          <div @click="remove(item._id)" v-else-if="field.type == 'close'">
             <img src="../../assets/close.png"/>
           </div>  
           <div v-else-if="field.type == 'update'" >
@@ -67,36 +67,30 @@
         api:'',
         route: this.$route.path,
         btn:'',
-        
-        bulcks: [],
-        test: false,
-        alo:''
-
+        test: false
       }
     },
     methods: {
       remove(id) {
-        axios.post(this.api_url.url+this.api_url.api+this.route+'/remove',{id:id}).then(() => {
+        let url = '';
+        if(this.route !== '/marca')  url = this.route
+        else url = '/admin'
+
+        axios.post(this.api_url.url+this.api_url.api+url+'/remove',{id:id}).then(() => {
+          this.getDataTable()
         }).catch(() => {
         })
+        
       },
       changeStatusConfirm(item, mode) {
-        for(let status of this.data) {
-          if(status._id == item._id) {
-          console.log(status)
-            const temp = !status[mode]
-            status[mode] ='! status[mode]'
-            console.log(temp)
+        axios.post(this.api_url.url+this.api_url.api+'/order/change/'+mode,{
+          id: item._id,
+          status: item[mode]
+        }).then(() => {
+          this.getDataTable()
+        }).catch(() => {
 
-            let foundIndex = this.bulcks.findIndex(x => x._id == item._id)
-            if(foundIndex != -1)
-              this.bulcks.push(status)
-            else
-              this.bulcks[foundIndex] = status
-            
-          }
-        }
-        console.log(item,mode)
+        })
       },
       getDataTable() {
         axios.post(this.api_url.url+this.api_url.api+'/'+this.api,{}).then(result => {
@@ -154,20 +148,21 @@
 
 <style scoped lang="scss">
   .table {
+   
     th, td {
       width:7vw;
       text-align: center;
     }
     th {
-      .md-table-head-container {
-        width: 14vw;
+      /deep/ .md-table-head-container {
+        max-width:9.5vw;
         text-align: center;
         word-wrap: break-word;
       }
     }
     td {
-      .md-table-cell-container {
-        width: 14vw !important;
+      /deep/ .md-table-cell-container {
+        max-width:9.5vw !important;
         text-align: center !important;
         word-wrap: break-word !important;
       }

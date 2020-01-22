@@ -6,10 +6,17 @@
       <md-button class="md-raised md-primary " @click="back()">back</md-button>
     </div>
 
+
     <md-field>
-      <label>Измените модель авто</label>
-      <md-input  type="text" id="model" name="model"  v-model="model"></md-input>
+      <label>Измените категорию</label>
+      <md-input  type="text" id="category" name="category"  v-model="category"></md-input>
     </md-field>
+
+    <md-field>
+      <label>Измените категорию на руском</label>
+      <md-input  type="text" id="category_ru" name="category_ru"  v-model="category_ru"></md-input>
+    </md-field>
+
     <div class="wrapper">
       <img v-if="!this.imageSrc" v-bind:src="this.api_url.url+'/file/uploads/'+data.url_img" />
       <img  :src="this.imageSrc"/>
@@ -19,7 +26,8 @@
         <md-file ref="fileupload" id="file" v-model="file" @change="sync"/>
       </md-field>
     </div>
-    <md-button class="md-raised md-primary"  @click="updateModel()">Добавить</md-button>
+    <md-button class="md-raised md-primary"  @click="updateCategory()">Добавить</md-button>
+
   </section>
 
 </template>
@@ -32,11 +40,12 @@
     name: 'update',
     props: [],
     mounted () {
-      this.getModelsId()
+      this.getCategoryId()
     },
     data () {
       return {
-        model: '',
+        category: '',
+        category_ru: '',
         file: null,
         api_url: api.config,
         data:[],
@@ -45,18 +54,16 @@
       }
     },
     methods: {
-      back() {
-        this.$router.go(-1)
-      },
-      getModelsId() {
-        axios.post(this.api_url.url+this.api_url.api+'/model/get/id',{id: this.id}).then(result => {
+      getCategoryId() {
+        axios.post(this.api_url.url+this.api_url.api+'/category/get/id',{id: this.id}).then(result => {
           this.data = result.data[0]
-          this.model = this.data.name
+          this.category = this.data.category
+          this.category_ru = this.data.category_ru
+
         }).catch(() => {
 
         })
       },
-      //Предпросмотр изображения//
       sync (e) {
         e.preventDefault();
         this.file = e.target.files[0]
@@ -67,20 +74,24 @@
         }
         reader.readAsDataURL(this.file);
       },
-
-      updateModel() {
+      updateCategory() {
         var data = new FormData();
         var imagefile = document.querySelector('#file')
         data.append('file', imagefile.files[0])
-        data.append('name', this.model)
+        data.append('name', this.category)
+        data.append('name_ru', this.category_ru)
         data.append('id', this.id)
 
-        axios.post(this.api_url.url+this.api_url.api+'/model/update/id', data,{ 
+        axios.post(this.api_url.url+this.api_url.api+'/category/update/id', data,{ 
         }).then(() => {
         }).catch(() => {
         })
         this.$router.go(-1)
+      },
+      back() {
+        this.$router.go(-1)
       }
+      
     },
     computed: {
 
@@ -98,6 +109,7 @@
       padding: 6px;
       font-weight: bold;
       font-family: sans-serif;
+      
     }
     .wrapper {
       display: flex;
