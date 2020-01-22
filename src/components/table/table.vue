@@ -67,7 +67,7 @@
         api:'',
         route: this.$route.path,
         btn:'',
-        test: false
+        test: false,
       }
     },
     methods: {
