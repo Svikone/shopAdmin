@@ -6,7 +6,6 @@
         <md-field>
           <label>Выберети марку авто</label>
           <md-select  v-model="selected" >
-            <!-- <option disabled value="">Выберите один из вариантов</option> -->
             <md-option  v-for="(item, i) in marcs" v-bind:key="i" v-bind:value="item.name">{{item.name}}</md-option>
           </md-select>
         </md-field>
@@ -33,8 +32,6 @@
   import axios from 'axios'
   import api from '../../../../../app.config.js'
 
-
-
   export default  {
     name: 'create',
     props: [],
@@ -54,7 +51,6 @@
       getMarc() {
         axios.post(this.api_url.url+this.api_url.api+'/admin/get/marcs',{}).then(result => {
           this.marcs = result.data
-          console.log(result.data)
         }).catch(() => {
 
         })
@@ -69,10 +65,8 @@
         data.append('model', this.model)
         data.append('marc', this.selected)
 
-        axios.post(this.api_url.url+this.api_url.api+'/model/add',data).then(result => {
-          // this.marcs = result.data
-          // console.log(result.data)
-          console.log(result)
+        axios.post(this.api_url.url+this.api_url.api+'/model/add',data).then(() => {
+         
         }).catch(() => {
 
         })

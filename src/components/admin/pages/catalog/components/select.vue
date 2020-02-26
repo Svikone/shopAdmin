@@ -4,11 +4,7 @@
     <md-field>
       <label>{{message}}</label>
 
-      <!-- <md-select v-if="items.length == 0 " @md-selected="select(selected)" v-model="selected">
-        <md-option  v-for="(item, i) in items" v-bind:key="i" v-bind:value="item.name">{{item.name}}</md-option>
-      </md-select> -->
       <div class="selectContainer" v-if="items.length > 0">
-
 
         <md-select v-if="items[0].selector === 'category'"  @md-selected="selectCategory(selectedCategory)" v-model="selectedCategory">
           <md-option  v-for="(item, i) in items" v-bind:key="i" v-bind:value="item.category">{{item.category}}</md-option>
@@ -22,9 +18,6 @@
           <md-option  v-for="(item, i) in items" v-bind:key="i" v-bind:value="item.name">{{item.name}}</md-option>
         </md-select>
       </div>
-
-     
-
 
     </md-field>
   </section>
@@ -45,9 +38,6 @@ import {eventBus} from '../../../../../main.js'
         selected: '',
         selectedCategory: '',
         selectedModel: '',
-
-
-
       }
     },
     methods: {
@@ -68,15 +58,11 @@ import {eventBus} from '../../../../../main.js'
           event
         )
       }
-     
-   
-     
     },
     computed: {
 
     }
 }
-
 
 </script>
 

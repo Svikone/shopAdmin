@@ -6,7 +6,6 @@
       <md-button class="md-raised md-primary " @click="back()">back</md-button>
     </div>
 
-
     <md-field>
       <label>Измените марку авто</label>
       <md-input  type="text" id="marc" name="marc"  v-model="marc"></md-input>
@@ -29,8 +28,6 @@
 <script lang="js">
   import axios from 'axios'
   import api from '../../../../../app.config.js'
-
-
 
   export default  {
     name: 'update',
@@ -57,6 +54,7 @@
 
         })
       },
+
       //Предпросмотр изображения//
       sync (e) {
         e.preventDefault();
@@ -68,6 +66,7 @@
         }
         reader.readAsDataURL(this.file);
       },
+      
       updateMarc() {
         var data = new FormData();
         var imagefile = document.querySelector('#file')

@@ -2,11 +2,8 @@
 
   <section class="admin">
     <syste-menu></syste-menu>
-    <!-- <div class="menu">
-    </div> -->
     <div class="content">
       <router-view></router-view>
-
     </div>
   </section>
 
@@ -47,12 +44,10 @@ import menu from './menu/menu'
     .menu {
       display: flex;
       flex-direction: column;
-      // width: 300px;
       min-width: 197px;
       background: #607D8B;
       height: 100%;
       position: fixed;
-
     }
     .content {
       width: 100%;

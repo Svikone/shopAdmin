@@ -25,8 +25,6 @@
   import axios from 'axios'
   import api from '../../../../../app.config.js'
 
-
-
   export default  {
     name: 'create',
     props: [],
@@ -43,17 +41,12 @@
     },
     methods: {
       addCategory() {
-        // console.log(this.category_ru,this.category)
         var data = new FormData();
         var imagefile = document.querySelector('#file')
-
         data.append('file', imagefile.files[0])
         data.append('category', this.category)
         data.append('category_ru', this.category_ru)
-        axios.post(this.api_url.url+this.api_url.api+'/category/add',data).then(result => {
-          // this.marcs = result.data
-          // console.log(result.data)
-          console.log(result)
+        axios.post(this.api_url.url+this.api_url.api+'/category/add',data).then(() => {
         }).catch(() => {
 
         })

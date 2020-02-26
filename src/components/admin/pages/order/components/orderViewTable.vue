@@ -10,7 +10,6 @@
         <md-table-cell md-numeric v-for="(field, i) in fields" v-bind:key="i" >
           <div >
             {{item[field.field]}}
-
           </div>
         </md-table-cell>
       </md-table-row>
@@ -26,8 +25,6 @@
   import axios from 'axios'
   import api from '../../../../../app.config.js'
 
-
-
   export default  {
     name: 'order-view-table',
     props: [],
@@ -42,14 +39,11 @@
         api_url: api.config,
         url: this.$router.currentRoute.params.id,
         data:[]
-
-
       }
     },
     methods: {
       getOrderItems() {
         axios.post(this.api_url.url+this.api_url.api+'/order/by/id',{id: this.url}).then(result => {
-          console.log(result)
           this.data = result.data
         }).catch(() => {
 

@@ -6,7 +6,6 @@
       <md-button class="md-raised md-primary " @click="back()">back</md-button>
     </div>
 
-
     <md-field>
       <label>Измените категорию</label>
       <md-input  type="text" id="category" name="category"  v-model="category"></md-input>
@@ -64,6 +63,7 @@
 
         })
       },
+
       sync (e) {
         e.preventDefault();
         this.file = e.target.files[0]
@@ -74,6 +74,7 @@
         }
         reader.readAsDataURL(this.file);
       },
+
       updateCategory() {
         var data = new FormData();
         var imagefile = document.querySelector('#file')
@@ -88,6 +89,7 @@
         })
         this.$router.go(-1)
       },
+      
       back() {
         this.$router.go(-1)
       }

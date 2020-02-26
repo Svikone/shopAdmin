@@ -3,20 +3,15 @@
   <section class="create">
     <h1>Добавить марку автомобиля</h1>
     <div class="">
-      <!-- <form id="uploadForm" name="uploadForm" enctype="multipart/form-data"> -->
-        
-        <md-field>
-          <label>Добавьте марку авто</label>
-          <md-input  type="text" id="marc" name="marc"  v-model="marc"></md-input>
-        </md-field>
-        <md-field>
-          <label>Добавьте изображение</label>
-          <md-file ref="fileupload" id="file" v-model="file"/>
-        </md-field>
-          <!-- <input type="file"  id="file" name="file" > -->
-          <md-button class="md-raised md-primary"  @click="addMarc()">Добавить</md-button>
-        <!-- <div @click="addMarc()">Добавить</div> -->
-      <!-- </form> -->
+      <md-field>
+        <label>Добавьте марку авто</label>
+        <md-input  type="text" id="marc" name="marc"  v-model="marc"></md-input>
+      </md-field>
+      <md-field>
+        <label>Добавьте изображение</label>
+        <md-file ref="fileupload" id="file" v-model="file"/>
+      </md-field>
+      <md-button class="md-raised md-primary"  @click="addMarc()">Добавить</md-button>
     </div>
   </section>
 
@@ -25,8 +20,6 @@
 <script lang="js">
   import axios from 'axios'
   import api from '../../../../../app.config.js'
-
-
 
   export default  {
     name: 'create',
@@ -45,12 +38,8 @@
       addMarc() {
         var data = new FormData();
         var imagefile = document.querySelector('#file')
-
         data.append('file', imagefile.files[0])
         data.append('marca', this.marc)
-
-
-        
         axios.post(this.api_url.url+this.api_url.api+'/admin/marca/add', data,{ 
         }).then(() => {
          

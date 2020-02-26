@@ -23,7 +23,8 @@
             <img v-bind:src="api_url.url+'/file/uploads/'+item.url_img" />
           </div>    
           <div v-else-if="field.type == 'Boolean'" >
-            <md-switch v-model="item[field.field]" class="md-primary" @change="changeStatusConfirm(item, field.field)"></md-switch>
+            <md-switch v-if="item[field.field] && field.field == 'status_payment'" v-model="item[field.field]" class="md-primary" @change="changeStatusConfirm(item, field.field)" disabled></md-switch>
+            <md-switch v-else v-model="item[field.field]" class="md-primary" @change="changeStatusConfirm(item, field.field)"></md-switch>
           </div> 
           <div @click="remove(item._id)" v-else-if="field.type == 'close'">
             <img src="../../assets/close.png"/>
@@ -37,9 +38,7 @@
         </md-table-cell>
       </md-table-row>
     </md-table>
-
   </section>
-
 </template>
 
 <script lang="js">
@@ -67,7 +66,7 @@
         api:'',
         route: this.$route.path,
         btn:'',
-        test: false,
+        restSweetch: "true",
       }
     },
     methods: {
@@ -79,8 +78,8 @@
           this.getDataTable()
         }).catch(() => {
         })
-        
       },
+
       changeStatusConfirm(item, mode) {
         axios.post(this.api_url.url+this.api_url.api+'/order/change/'+mode,{
           id: item._id,
@@ -91,6 +90,7 @@
 
         })
       },
+
       getDataTable() {
         axios.post(this.api_url.url+this.api_url.api+'/'+this.api,{}).then(result => {
           this.data = result.data
@@ -128,8 +128,6 @@
         this.fields = config.fields;
         this.api = config.api.url;
         this.btn = config.btn;
-
-        console.log(this.$router.currentRoute.path)
         this.getDataTable()
       }
       

@@ -2,8 +2,6 @@
 
   <section class="category">
     <router-view></router-view>
-
-   
   </section>
 
 </template>

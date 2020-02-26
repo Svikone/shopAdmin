@@ -48,6 +48,7 @@
       back() {
         this.$router.go(-1)
       },
+
       getModelsId() {
         axios.post(this.api_url.url+this.api_url.api+'/model/get/id',{id: this.id}).then(result => {
           this.data = result.data[0]
@@ -56,6 +57,7 @@
 
         })
       },
+      
       //Предпросмотр изображения//
       sync (e) {
         e.preventDefault();

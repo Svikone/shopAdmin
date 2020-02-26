@@ -32,9 +32,6 @@
   import {eventBus} from '../../../../../main.js'
   import api from '../../../../../app.config.js'
 
-
-
-
   export default  {
     name: 'create',
     props: [],
@@ -70,7 +67,6 @@
     },
     methods: {
       addCatalog() {
-        console.log(this.selectedModel,this.selected, this.selectedCategory,this.price)
         var data = new FormData();
         var imagefile = document.querySelector('#file')
 
@@ -101,8 +97,6 @@
       },
 
       select(event) {
-        console.log(event)
-        
         axios.post(this.api_url.url+this.api_url.api+'/model/marc',{id: event}).then(result => {
           this.models = result.data
         }).catch(() => {
@@ -121,7 +115,6 @@
       getCategory() {
         axios.post(this.api_url.url+this.api_url.api+'/category/get/all',{}).then(result => {
           this.category = result.data
-          console.log(this.category[0].selector)
         }).catch(() => {
 
         })
